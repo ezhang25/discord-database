@@ -4,9 +4,16 @@ class Directory:
         self.data = data
         self.children = []
     
-    def add_child(self: Directory, child: Directory):
-        self.children.append(child)
-        self.children.sort()
+    def add_child(self: Directory, new_child: Directory) -> int:
+        for child in self.children:
+            if new_child.name == child.name:
+                return 1
+        self.children.append(new_child)
+        self.children.sort(key=lambda x: x.name)
+        return 0
+
+    def get_children(self: Directory) -> list[Directory | File]:
+        return self.children
 
     def get_name(self: Directory) -> str:
         return self.name
@@ -16,6 +23,9 @@ class File:
         self.name = name
         self.data = data
     
-    def get_contents(self: File) -> str:
+    def get_name(self: File) -> str:
         return self.name
+    
+    def get_contents(self: File) -> str:
+        return self.data
         

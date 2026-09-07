@@ -1,7 +1,7 @@
 from files import *
 from commands import *
 
-root = Directory("random data", "/root")
+root = root_directory
 
 folder = Directory("random data", "folder")
 print(root.add_child(folder))
@@ -26,3 +26,8 @@ alphabetical.add_child(bottom)
 
 ls(root)
 tree(root)
+ls()
+tree()
+mkdir(Directory("random data", "cow"))
+tree()
+tree(alphabetical)

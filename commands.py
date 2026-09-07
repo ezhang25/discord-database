@@ -1,13 +1,16 @@
 from files import *
 
-current_directory = Directory('data', '/')
+root_directory = Directory('data', '/root')
 
-def ls(directory: Directory=current_directory) -> list[Directory | File]:
+def ls(directory: Directory=root_directory) -> list[Directory | File]:
     children = directory.get_children()
     for child in children:
         print(child.name)
 
-def tree(directory: Directory=current_directory, layer: int=1) -> str:
+def mkdir(new_directory:Directory, directory: Directory=root_directory) -> int:
+    directory.add_child(new_directory)
+
+def tree(directory: Directory=root_directory, layer: int=1) -> str:
     print(directory.name)
     for child in directory.children:
         for i in range(0, layer):

@@ -7,21 +7,25 @@ def ls(directory: Directory=root_directory) -> list[Directory | File]:
     for child in children:
         print(child.name)
 
-def mkdir(new_directory: Directory, directory: Directory=root_directory) -> int:
-    directory.add_child(new_directory)
-
 def cd(name: str, current_directory: Directory):
     if name == "..":
-        return current_directory.parent
+        if current_directory.parent != None:
+            return current_directory.parent
+        return current_directory
     else:
         for directory in current_directory.children:
             if name == directory.name:
                 return directory
-            else:
-                return current_directory
+        return current_directory
+
+def mkdir(new_directory: Directory, directory: Directory=root_directory) -> int:
+    directory.add_child(new_directory)
 
 def touch(new_file: File, directory: Directory):
     directory.add_child(new_file)
+
+def rm(target: str, directory: Directory):
+    directory.children = [c for c in directory.children if c.name != target]
 
 def tree(directory: Directory=root_directory, layer: int=1) -> str:
     print(directory.name)

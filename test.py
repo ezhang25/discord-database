@@ -48,3 +48,6 @@ print("\n\n")
 
 curr = cd(".." , curr)
 tree(curr)
+
+rm("randomfile2", cow)
+tree(curr)

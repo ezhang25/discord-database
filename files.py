@@ -1,6 +1,6 @@
 class Directory:
-    def __init__(self: Directory, data: str, name:str):
-        self.name = name
+    def __init__(self: Directory, data: str, name: str, parent: Directory=None):
+        self.name = f"{name}/"
         self.data = data
         self.children = []
     
@@ -8,6 +8,7 @@ class Directory:
         for child in self.children:
             if new_child.name == child.name:
                 return 1
+        new_child.parent = self
         self.children.append(new_child)
         self.children.sort(key=lambda x: x.name)
         return 0

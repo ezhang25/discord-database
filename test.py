@@ -2,6 +2,7 @@ from files import *
 from commands import *
 
 root = root_directory
+curr = root_directory
 
 folder = Directory("random data", "folder")
 print(root.add_child(folder))
@@ -31,3 +32,8 @@ tree()
 mkdir(Directory("random data", "cow"))
 tree()
 tree(alphabetical)
+
+curr = cd("alphabetical/" , curr)
+tree(curr)
+curr = cd(".." , curr)
+tree(curr)

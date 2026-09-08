@@ -1,7 +1,6 @@
 class Directory:
-    def __init__(self: Directory, data: str, name: str, parent: Directory=None):
+    def __init__(self: Directory, name: str, parent: Directory=None):
         self.name = f"{name}/"
-        self.data = data
         self.children = []
     
     def add_child(self: Directory, new_child: Directory | File) -> int:
@@ -21,13 +20,9 @@ class Directory:
         return self.name
 
 class File:
-    def __init__(self: File, data: str, name: str):
+    def __init__(self: File, name: str):
         self.name = name
-        self.data = data
     
     def get_name(self: File) -> str:
         return self.name
-    
-    def get_contents(self: File) -> str:
-        return self.data
         

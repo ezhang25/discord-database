@@ -1,9 +1,18 @@
 from files import *
 from commands import *
 
-root = root_directory
-curr = root_directory
+file = FileSystem()
+folder1 = Directory("folder1")
+file.root.add_child(folder1)
+file1 = File("file1")
+folder1.add_child(file1)
+file.root.add_child(Directory("folder2"))
+file.root.add_child(Directory("folder3"))
+file.resolve_path("/folder1/")
+print(file.ls("/folder1/"))
+print(file.ls("/"))
 
+"""
 folder = Directory("random data", "folder")
 print(root.add_child(folder))
 
@@ -51,3 +60,9 @@ tree(curr)
 
 rm("randomfile2", cow)
 tree(curr)
+
+parse_test = "root/pet/name/"
+parsed = parse_test.split("/")
+parsed = [p for p in parsed if p!='']
+print(f"\n\n{parsed}")
+"""

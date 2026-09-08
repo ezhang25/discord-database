@@ -4,11 +4,12 @@ class Directory:
         self.data = data
         self.children = []
     
-    def add_child(self: Directory, new_child: Directory) -> int:
+    def add_child(self: Directory, new_child: Directory | File) -> int:
         for child in self.children:
             if new_child.name == child.name:
                 return 1
-        new_child.parent = self
+        if isinstance(new_child, Directory):
+            new_child.parent = self
         self.children.append(new_child)
         self.children.sort(key=lambda x: x.name)
         return 0

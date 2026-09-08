@@ -25,6 +25,12 @@ alphabetical.add_child(cow)
 bottom = Directory("random data", "bottom")
 alphabetical.add_child(bottom)
 
+randomfile = File("random data", "randomfile")
+alphabetical.add_child(randomfile)
+
+randomfile2 = File("random data", "randomfile2")
+cow.add_child(randomfile2)
+
 ls(root)
 tree(root)
 ls()
@@ -33,7 +39,12 @@ mkdir(Directory("random data", "cow"))
 tree()
 tree(alphabetical)
 
+print("\n\n")
+
 curr = cd("alphabetical/" , curr)
 tree(curr)
+
+print("\n\n")
+
 curr = cd(".." , curr)
 tree(curr)

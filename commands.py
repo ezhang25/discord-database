@@ -20,6 +20,9 @@ def cd(name: str, current_directory: Directory):
             else:
                 return current_directory
 
+def touch(new_file: File, directory: Directory):
+    directory.add_child(new_file)
+
 def tree(directory: Directory=root_directory, layer: int=1) -> str:
     print(directory.name)
     for child in directory.children:
@@ -28,4 +31,7 @@ def tree(directory: Directory=root_directory, layer: int=1) -> str:
                 print("  └──", end="")
             else:
                 print("  │", end="  ")
-        tree(child, layer+1)
+        if isinstance(child, Directory):
+            tree(child, layer+1)
+        else:
+            print(child.name)

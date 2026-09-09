@@ -6,6 +6,9 @@ folder1 = Directory("folder1")
 file.root.add_child(folder1)
 file1 = File("file1")
 folder1.add_child(file1)
+folder11 = Directory("folder11")
+folder1.add_child(folder11)
+folder11.add_child(Directory("folder12"))
 file.root.add_child(Directory("folder2"))
 file.root.add_child(Directory("folder3"))
 file.resolve_path("/folder1/")
@@ -14,7 +17,14 @@ print(file.ls("/"))
 
 print()
 
-print(file.root.tree())
+print(file.rm("folder2/"))
+file.mkdir("new_folder")
+file.touch("newfile")
+
+print(file.tree())
+
+file.cd("folder1/")
+print(file.tree())
 
 """
 folder = Directory("random data", "folder")

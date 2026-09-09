@@ -13,7 +13,7 @@ class Directory:
         self.children.sort(key=lambda x: x.name)
         return 0
     
-    def tree(self: Directory, layer: int=1) -> str:
+    def build_tree(self: Directory, layer: int=1) -> str:
         tree_str = f"{self.name}\n"
         for child in self.children:
             for i in range(0, layer):
@@ -22,13 +22,13 @@ class Directory:
                 else:
                     tree_str += "  │  "
 
-            tree_str += child.tree(layer+1)
+            tree_str += child.build_tree(layer+1)
         return tree_str
 
 class File:
     def __init__(self: File, name: str):
         self.name = name
 
-    def tree(self: File, layer: int=1) -> str:
+    def build_tree(self: File, layer: int=1) -> str:
         return f"{self.name}\n"
         

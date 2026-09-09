@@ -5,7 +5,7 @@ class FileSystem:
         self.root = Directory("root")
         self.curr = self.root
         
-    def resolve_path(self: FileSystem, path: str) -> Directory:
+    def resolve_path(self: FileSystem, path: str) -> Directory | File:
         path = [p for p in path.replace('/', '/,').split(',') if p != '']
 
         if path[0] == "/":
@@ -41,40 +41,33 @@ class FileSystem:
             all_files += f"{child.name} "
         return all_files
     
-   
-"""
-     def tree(self: FileSystem, directory: Directory, layer: int=1) -> str:
-        tree_paths = []
-        for child in directory.children:
-            for i in range(0, layer):
-                if i == layer-1:
-                    print("  └──", end="")
-                else:
-                    print("  │", end="  ")
-            if isinstance(child, Directory):
-                tree(child, layer+1)
-            else:
-                print(child.name)
-
     def cd(self, path: str):
-        if name == "..":
-            if current_directory.parent != None:
-                return current_directory.parent
-            return current_directory
-        else:
-            for directory in current_directory.children:
-                if name == directory.name:
-                    return directory
-            return current_directory
-
-    def mkdir(new_directory: Directory, directory: Directory=root_directory) -> int:
-        directory.add_child(new_directory)
-
-    def touch(new_file: File, directory: Directory):
-        directory.add_child(new_file)
-
-    def rm(target: str, directory: Directory):
-        directory.children = [c for c in directory.children if c.name != target]
-
+        for directory in self.curr.children:
+            if path == directory.name:
+                self.curr = directory
+        return self.curr
     
-        """
+    def tree(self: FileSystem, path: str=None) -> str:
+        if path == None:
+            return self.curr.build_tree()
+        else:
+            return self.resolve_path(path).build_tree()
+    
+    def mkdir(self: FileSystem, name: str) -> bool:
+        for child in self.curr.children:
+            if name == child.name:
+                return False
+        self.curr.add_child(Directory(name))
+        return True
+    
+    def touch(self: FileSystem, name: str) -> bool:
+        for child in self.curr.children:
+            if name == child.name:
+                return False
+        self.curr.add_child(File(name))
+        return True
+    
+    def rm(self: FileSystem, name: str) -> bool:
+        num_items = len(self.curr.children)
+        self.curr.children = [child for child in self.curr.children if name != child.name]
+        return num_items != len(self.curr.children)

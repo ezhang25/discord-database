@@ -12,6 +12,10 @@ file.resolve_path("/folder1/")
 print(file.ls("/folder1/"))
 print(file.ls("/"))
 
+print()
+
+print(file.root.tree())
+
 """
 folder = Directory("random data", "folder")
 print(root.add_child(folder))

@@ -12,17 +12,23 @@ class Directory:
         self.children.append(new_child)
         self.children.sort(key=lambda x: x.name)
         return 0
+    
+    def tree(self: Directory, layer: int=1) -> str:
+        tree_str = f"{self.name}\n"
+        for child in self.children:
+            for i in range(0, layer):
+                if i == layer-1:
+                    tree_str += "  └──"
+                else:
+                    tree_str += "  │  "
 
-    def get_children(self: Directory) -> list[Directory | File]:
-        return self.children
-
-    def get_name(self: Directory) -> str:
-        return self.name
+            tree_str += child.tree(layer+1)
+        return tree_str
 
 class File:
     def __init__(self: File, name: str):
         self.name = name
-    
-    def get_name(self: File) -> str:
-        return self.name
+
+    def tree(self: File, layer: int=1) -> str:
+        return f"{self.name}\n"
         

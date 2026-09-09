@@ -55,7 +55,7 @@ class FileSystem:
     
     def mkdir(self: FileSystem, name: str) -> bool:
         for child in self.curr.children:
-            if name == child.name:
+            if f"{name}/" == child.name:
                 return False
         self.curr.add_child(Directory(name))
         return True
